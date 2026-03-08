@@ -6,388 +6,9 @@
 <title>26.03.08 周度市场预期和板块观察</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-:root {
-  --bg-deep: #0a0c10;
-  --bg-card: #11141a;
-  --bg-card-hover: #161a22;
-  --bg-surface: #1a1e28;
-  --border: #1e2330;
-  --border-accent: #2a3040;
-  --text-primary: #e8eaf0;
-  --text-secondary: #8b92a8;
-  --text-muted: #555d75;
-  --accent-bull: #22c55e;
-  --accent-bull-dim: rgba(34, 197, 94, 0.12);
-  --accent-bear: #ef4444;
-  --accent-bear-dim: rgba(239, 68, 68, 0.1);
-  --accent-gold: #f59e0b;
-  --accent-gold-dim: rgba(245, 158, 11, 0.1);
-  --accent-blue: #3b82f6;
-  --accent-blue-dim: rgba(59, 130, 246, 0.1);
-  --accent-purple: #a78bfa;
-  --accent-purple-dim: rgba(167, 139, 250, 0.1);
-  --accent-cyan: #22d3ee;
-  --accent-warn: #fb923c;
-  --accent-warn-dim: rgba(251, 146, 60, 0.1);
-  --font-mono: 'IBM Plex Mono', 'SF Mono', monospace;
-  --font-sans: 'Noto Sans SC', 'Inter', system-ui, sans-serif;
-  --radius: 8px;
-  --radius-lg: 12px;
-}
-
-html { scroll-behavior: smooth; background: var(--bg-deep); color: var(--text-primary); }
-
-body {
-  font-family: var(--font-sans);
-  font-size: 15px;
-  line-height: 1.7;
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    linear-gradient(90deg, rgba(30, 35, 48, 0.3) 1px, transparent 1px),
-    linear-gradient(rgba(30, 35, 48, 0.3) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-body::after {
-  content: '';
-  position: fixed;
-  top: -200px;
-  right: -200px;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.container {
-  position: relative;
-  z-index: 1;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 40px 24px 80px;
-}
-
-/* Header */
-.header { margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--border); position: relative; }
-.header::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 120px; height: 2px; background: linear-gradient(90deg, var(--accent-blue), transparent); }
-
-.header-meta {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--text-muted);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.header-meta .pulse {
-  display: inline-block;
-  width: 6px; height: 6px;
-  background: var(--accent-bull);
-  border-radius: 50%;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
-  50% { opacity: 0.6; box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
-}
-
-.header h1 {
-  font-size: clamp(28px, 4vw, 42px);
-  font-weight: 900;
-  line-height: 1.2;
-  letter-spacing: -1px;
-  background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.header .subtitle { font-size: 14px; color: var(--text-muted); margin-top: 8px; font-style: italic; }
-
-/* Disclaimer */
-.disclaimer {
-  font-size: 11px;
-  color: var(--text-muted);
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 12px 16px;
-  margin-bottom: 40px;
-  line-height: 1.6;
-  font-family: var(--font-mono);
-}
-
-/* Allocation Bar */
-.alloc-bar-wrapper { margin-bottom: 40px; }
-
-.alloc-bar-label {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.alloc-bar-label .account-name { font-weight: 600; color: var(--text-primary); font-size: 15px; }
-
-.alloc-bar {
-  height: 32px;
-  border-radius: 6px;
-  overflow: hidden;
-  display: flex;
-  border: 1px solid var(--border);
-  background: var(--bg-card);
-}
-
-.alloc-bar .seg {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  position: relative;
-  overflow: hidden;
-}
-
-.alloc-bar .seg.offense { background: linear-gradient(135deg, rgba(34, 197, 94, 0.25), rgba(34, 197, 94, 0.15)); color: var(--accent-bull); border-right: 1px solid rgba(34, 197, 94, 0.2); }
-.alloc-bar .seg.defense { background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.12)); color: var(--accent-gold); border-right: 1px solid rgba(245, 158, 11, 0.2); }
-.alloc-bar .seg.cash { background: linear-gradient(135deg, rgba(139, 146, 168, 0.12), rgba(139, 146, 168, 0.06)); color: var(--text-secondary); }
-
-.alloc-change { font-size: 11px; color: var(--text-muted); margin-top: 6px; font-family: var(--font-mono); }
-.alloc-change span { color: var(--text-secondary); }
-
-/* Section */
-.section { margin-bottom: 40px; animation: fadeUp 0.6s ease-out both; }
-@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-
-/* Narrative */
-.narrative {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-  margin-bottom: 24px;
-  position: relative;
-  overflow: hidden;
-}
-
-.narrative::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; }
-.narrative.account-a::before { background: linear-gradient(180deg, var(--accent-blue), transparent); }
-.narrative.account-overseas::before { background: linear-gradient(180deg, var(--accent-purple), transparent); }
-
-.narrative h3 { font-size: 16px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-.narrative h3 .emoji { font-size: 18px; }
-.narrative p { color: var(--text-secondary); font-size: 14px; line-height: 1.8; margin-bottom: 12px; }
-.narrative p:last-child { margin-bottom: 0; }
-
-/* Expectations */
-.expect-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
-@media (max-width: 640px) { .expect-grid { grid-template-columns: 1fr; } }
-
-.expect-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px;
-  position: relative;
-  overflow: hidden;
-  transition: border-color 0.2s, background 0.2s;
-}
-
-.expect-card:hover { border-color: var(--border-accent); background: var(--bg-card-hover); }
-.expect-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
-.expect-card.priced::before { background: linear-gradient(90deg, var(--accent-bull), transparent); }
-.expect-card.unpriced::before { background: linear-gradient(90deg, var(--accent-warn), transparent); }
-
-.expect-card .card-label { font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
-.expect-card.priced .card-label { color: var(--accent-bull); }
-.expect-card.unpriced .card-label { color: var(--accent-warn); }
-
-.expect-card ul { list-style: none; padding: 0; }
-.expect-card ul li { font-size: 13px; color: var(--text-secondary); padding: 4px 0; padding-left: 14px; position: relative; line-height: 1.6; }
-.expect-card ul li::before { content: ''; position: absolute; left: 0; top: 11px; width: 4px; height: 4px; border-radius: 50%; }
-.expect-card.priced ul li::before { background: var(--accent-bull); opacity: 0.5; }
-.expect-card.unpriced ul li::before { background: var(--accent-warn); opacity: 0.5; }
-
-/* Portfolio */
-.portfolio-section { margin-bottom: 48px; }
-.risk-block { margin-bottom: 20px; }
-
-.risk-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
-  padding: 10px 16px;
-  border-radius: var(--radius);
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.risk-header .risk-pct { font-family: var(--font-mono); font-size: 18px; font-weight: 700; margin-left: auto; }
-
-.risk-low { background: var(--accent-gold-dim); color: var(--accent-gold); border: 1px solid rgba(245, 158, 11, 0.2); }
-.risk-mid { background: var(--accent-blue-dim); color: var(--accent-blue); border: 1px solid rgba(59, 130, 246, 0.2); }
-.risk-high { background: var(--accent-warn-dim); color: var(--accent-warn); border: 1px solid rgba(251, 146, 60, 0.2); }
-.risk-spec { background: var(--accent-bear-dim); color: var(--accent-bear); border: 1px solid rgba(239, 68, 68, 0.2); }
-
-.holdings { display: flex; flex-direction: column; gap: 6px; padding-left: 4px; }
-
-.holding-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 10px 14px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  transition: border-color 0.2s, background 0.2s;
-  cursor: default;
-}
-
-.holding-item:hover { border-color: var(--border-accent); background: var(--bg-card-hover); }
-
-.holding-item .dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 7px; flex-shrink: 0; }
-.holding-item .name { font-size: 14px; font-weight: 500; color: var(--text-primary); flex-shrink: 0; }
-.holding-item .note { font-size: 12px; color: var(--text-muted); line-height: 1.6; flex: 1; }
-
-.holding-item .planned {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--accent-cyan);
-  background: rgba(34, 211, 238, 0.08);
-  padding: 2px 6px;
-  border-radius: 3px;
-  letter-spacing: 0.5px;
-  white-space: nowrap;
-  margin-top: 2px;
-}
-
-.difficulty-tag {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--accent-bear);
-  background: var(--accent-bear-dim);
-  padding: 2px 6px;
-  border-radius: 3px;
-  letter-spacing: 0.5px;
-  white-space: nowrap;
-  display: inline-block;
-  margin-bottom: 6px;
-}
-
-/* Events */
-.events-section { margin-bottom: 48px; }
-
-.importance-badge {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 600;
-  padding: 3px 10px;
-  border-radius: 4px;
-  letter-spacing: 1px;
-  background: var(--accent-bear-dim);
-  color: var(--accent-bear);
-  border: 1px solid rgba(239, 68, 68, 0.2);
-}
-
-.event-list { display: flex; flex-direction: column; gap: 4px; }
-
-.event-item {
-  display: grid;
-  grid-template-columns: 70px 1fr;
-  gap: 16px;
-  padding: 10px 14px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  transition: border-color 0.2s;
-  align-items: start;
-}
-
-.event-item:hover { border-color: var(--border-accent); }
-.event-item.future { opacity: 0.6; border-style: dashed; }
-
-.event-date { font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--accent-blue); white-space: nowrap; }
-.event-content { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
-.event-content .macro { color: var(--accent-gold); font-weight: 500; }
-.event-content .earnings { color: var(--text-muted); font-size: 12px; }
-.event-content .highlight { color: var(--accent-cyan); font-weight: 500; }
-
-/* Notes */
-.notes-section {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 20px 24px;
-  margin-bottom: 40px;
-}
-
-.notes-section h3 { font-size: 14px; font-weight: 600; margin-bottom: 12px; color: var(--text-secondary); }
-.notes-section ol { padding-left: 20px; color: var(--text-muted); font-size: 12px; line-height: 1.8; }
-
-/* Footer */
-.footer {
-  text-align: center;
-  padding: 32px 0;
-  border-top: 1px solid var(--border);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--text-muted);
-  letter-spacing: 1px;
-}
-
-/* Divider */
-.divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border-accent), transparent); margin: 40px 0; }
-
-/* Section header */
-.section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
-.section-header h2 { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
-
-/* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-deep); }
-::-webkit-scrollbar-thumb { background: var(--border-accent); border-radius: 3px; }
-
-/* TOC */
-.toc { position: fixed; top: 50%; right: 20px; transform: translateY(-50%); display: flex; flex-direction: column; gap: 8px; z-index: 100; }
-@media (max-width: 1200px) { .toc { display: none; } }
-.toc a { width: 8px; height: 8px; border-radius: 50%; background: var(--border-accent); transition: all 0.3s; text-decoration: none; position: relative; }
-.toc a:hover, .toc a.active { background: var(--accent-blue); transform: scale(1.4); box-shadow: 0 0 8px rgba(59, 130, 246, 0.4); }
-.toc a::before { content: attr(data-label); position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-family: var(--font-mono); font-size: 10px; color: var(--text-secondary); background: var(--bg-surface); border: 1px solid var(--border); padding: 3px 8px; border-radius: 4px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
-.toc a:hover::before { opacity: 1; }
-
-@media (max-width: 768px) {
-  .container { padding: 24px 16px 60px; }
-  .narrative { padding: 18px; }
-  .event-item { grid-template-columns: 56px 1fr; gap: 10px; }
-}
-</style>
+<link rel="stylesheet" href="styles/main.css">
 </head>
-<body>
+<body class="glow-decoration">
 
 <nav class="toc">
   <a href="#overview" data-label="总览"></a>
@@ -436,13 +57,13 @@ body::after {
     <div class="narrative account-a">
       <h3><span class="emoji">📊</span> 已经没有简单题</h3>
       <p>美伊仍在继续油价还在高位，亚洲资金在日韩台港快速轮动，交易层面进入高难度模式，但左侧价值投资反而进入简单模式（日韩台港都跌出价值）— 大概率是资金造危机拿筹码。</p>
-      <p>港右侧等北水 + 回购 + 降息 + RMB升值 <strong style="color:var(--accent-bull)">四重 buff</strong> vs 清单 + 字节 + 移动 + 抱团智咪 <strong style="color:var(--accent-bear)">四重 debuff</strong>。A 短期等量回归。</p>
+      <p>港右侧等北水 + 回购 + 降息 + RMB升值 <strong class="text-bull">四重 buff</strong> vs 清单 + 字节 + 移动 + 抱团智咪 <strong class="text-bear">四重 debuff</strong>。A 短期等量回归。</p>
       <p>本轮🐒大概率再做 A500 一根上影结束（汪队减持结束公告一发然后最后疯狂），依然科技外需 + 涨价板块高抛低吸（高位结账 + 低位埋伏 + 小心追高最后一棒被套在山顶），内需超跌反弹，26 全年依然要留足现金迎接可能的黑天鹅。</p>
     </div>
 
     <div class="expect-grid">
       <div class="expect-card priced">
-        <div class="card-label">✅ 已预期</div>
+        <div class="card-label mono-label">✅ 已预期</div>
         <ul>
           <li>美降息周期但长端下不来</li>
           <li>存款搬家，进一步重视股市</li>
@@ -452,7 +73,7 @@ body::after {
         </ul>
       </div>
       <div class="expect-card unpriced">
-        <div class="card-label">⚠️ 未充分预期</div>
+        <div class="card-label mono-label">⚠️ 未充分预期</div>
         <ul>
           <li>美伊 / 内不确定外 TW（食品黄金军火）</li>
           <li>再通胀叙事 / 26年经济刺激超预期</li>
@@ -478,13 +99,13 @@ body::after {
           <div class="holding-item">
             <div class="dot" style="background:var(--accent-gold)"></div>
             <span class="name">黄金</span>
-            <span class="planned">PLANNED</span>
+            <span class="tag tag--planned">PLANNED</span>
             <span class="note">回踩看30日线，长期挖矿成本3x + 金银比，高抛低吸交易策略</span>
           </div>
           <div class="holding-item">
             <div class="dot" style="background:var(--accent-gold)"></div>
             <span class="name">红利</span>
-            <span class="planned">PLANNED</span>
+            <span class="tag tag--planned">PLANNED</span>
             <span class="note">大部分高位，家电在支撑位，运营商30日线阻力，原油短多长空高难度</span>
           </div>
           <div class="holding-item">
@@ -525,7 +146,7 @@ body::after {
           <div class="holding-item">
             <div class="dot" style="background:var(--accent-warn)"></div>
             <div>
-              <span class="difficulty-tag">超高难度</span>
+              <span class="tag tag--difficulty">超高难度</span>
             </div>
           </div>
           <div class="holding-item">
@@ -551,7 +172,7 @@ body::after {
           <div class="holding-item">
             <div class="dot" style="background:var(--accent-warn)"></div>
             <span class="name">白酒</span>
-            <span class="planned">PLANNED</span>
+            <span class="tag tag--planned">PLANNED</span>
             <span class="note">反弹止盈，左侧当债券 + 复苏 option</span>
           </div>
         </div>
@@ -567,7 +188,7 @@ body::after {
           <div class="holding-item">
             <div class="dot" style="background:var(--accent-bear)"></div>
             <div>
-              <span class="difficulty-tag">超高难度</span>
+              <span class="tag tag--difficulty">超高难度</span>
             </div>
           </div>
           <div class="holding-item">
@@ -626,7 +247,7 @@ body::after {
 
     <div class="expect-grid">
       <div class="expect-card priced">
-        <div class="card-label">✅ 已预期</div>
+        <div class="card-label mono-label">✅ 已预期</div>
         <ul>
           <li>Warsh 联储独立性</li>
           <li>关税 taco</li>
@@ -635,7 +256,7 @@ body::after {
         </ul>
       </div>
       <div class="expect-card unpriced">
-        <div class="card-label">⚠️ 未充分预期</div>
+        <div class="card-label mono-label">⚠️ 未充分预期</div>
         <ul>
           <li>美伊 / 原油反弹后的再通胀</li>
           <li>美国政府再关门 / ICE</li>
@@ -676,7 +297,7 @@ body::after {
           <div class="holding-item">
             <div class="dot" style="background:var(--accent-gold)"></div>
             <span class="name">低IV期权对冲</span>
-            <span class="planned">PLANNED</span>
+            <span class="tag tag--planned">PLANNED</span>
             <span class="note">DIA SPY GLD IWM XBI BRK</span>
           </div>
           <div class="holding-item">
@@ -737,7 +358,7 @@ body::after {
           <div class="holding-item">
             <div class="dot" style="background:var(--accent-warn)"></div>
             <div>
-              <span class="difficulty-tag">超高难度</span>
+              <span class="tag tag--difficulty">超高难度</span>
             </div>
           </div>
           <div class="holding-item">
@@ -768,19 +389,19 @@ body::after {
           <div class="holding-item">
             <div class="dot" style="background:var(--accent-bear)"></div>
             <span class="name">光通信/光纤</span>
-            <span class="planned">PLANNED</span>
+            <span class="tag tag--planned">PLANNED</span>
             <span class="note">右侧</span>
           </div>
           <div class="holding-item">
             <div class="dot" style="background:var(--accent-bear)"></div>
             <span class="name">电网设备</span>
-            <span class="planned">PLANNED</span>
+            <span class="tag tag--planned">PLANNED</span>
             <span class="note">高位不知道回调情况</span>
           </div>
           <div class="holding-item">
             <div class="dot" style="background:var(--accent-bear)"></div>
             <div>
-              <span class="difficulty-tag">超高难度</span>
+              <span class="tag tag--difficulty">超高难度</span>
             </div>
           </div>
           <div class="holding-item">
@@ -810,7 +431,7 @@ body::after {
   <section class="events-section" id="events">
     <div class="section-header">
       <h2>📅 Key Events</h2>
-      <span class="importance-badge">重要性：高</span>
+      <span class="badge badge--danger">重要性：高</span>
     </div>
 
     <div class="event-list">
